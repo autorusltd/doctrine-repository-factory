@@ -11,7 +11,6 @@ use Arus\Doctrine\RepositoryFactory\Tests\Resources\RepositoryTest;
 use DI\Container;
 use DI\ContainerBuilder;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Repository\RepositoryFactory;
 use Doctrine\ORM\Tools\Setup as DoctrineSetup;
 use PHPUnit\Framework\TestCase;
@@ -42,7 +41,7 @@ class InjectableRepositoryFactoryTest extends TestCase
      */
     public function testGetRepository() : void
     {
-        $entityManager = $this->container->get(EntityManagerInterface::class);
+        $entityManager = $this->container->get(EntityManager::class);
 
         $this->container->set('foo', 'bar');
         $this->container->set('bar', 'baz');
@@ -58,7 +57,7 @@ class InjectableRepositoryFactoryTest extends TestCase
      */
     public function testGetRepositoryRepeatedly() : void
     {
-        $entityManager = $this->container->get(EntityManagerInterface::class);
+        $entityManager = $this->container->get(EntityManager::class);
 
         $this->container->set('foo', 'bar');
         $this->container->set('bar', 'baz');
@@ -82,7 +81,7 @@ class InjectableRepositoryFactoryTest extends TestCase
 
         $this->container = $builder->build();
 
-        $this->container->set(EntityManagerInterface::class, function (Container $container) : EntityManagerInterface {
+        $this->container->set(EntityManager::class, function (Container $container) : EntityManager {
             $config = DoctrineSetup::createAnnotationMetadataConfiguration([__DIR__], true, null, null, false);
             $config->setRepositoryFactory(new InjectableRepositoryFactory($container));
 
@@ -96,8 +95,8 @@ class InjectableRepositoryFactoryTest extends TestCase
      */
     protected function tearDown()
     {
-        if ($this->container->has(EntityManagerInterface::class)) {
-            $entityManager = $this->container->get(EntityManagerInterface::class);
+        if ($this->container->has(EntityManager::class)) {
+            $entityManager = $this->container->get(EntityManager::class);
             $entityManager->getConnection()->close();
             $entityManager->close();
         }

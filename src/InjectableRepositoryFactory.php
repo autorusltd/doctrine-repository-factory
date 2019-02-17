@@ -21,7 +21,7 @@ use Doctrine\ORM\Repository\RepositoryFactory;
 /**
  * Import functions
  */
-use spl_object_hash;
+use function spl_object_hash;
 
 /**
  * InjectableRepositoryFactory
