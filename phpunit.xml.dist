@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<phpunit colors="true">
+    <testsuites>
+        <testsuite name="Arus Doctrine Repository Factory Test Suite">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>./src</directory>
+        </whitelist>
+    </filter>
+    <php>
+        <env name="DATABASE_URL" value="mysql://root@127.0.0.1/test"/>
+    </php>
+</phpunit>
